@@ -16,4 +16,4 @@ For a given table with columns col1, ..., coln, of types type1, ..., typen, it's
 new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
 ```
 
-This table is by default read only. If you would like the ability to write to this table, use the keyword ```UNSAFE_AUDITED``` instead.
+This table is by default read only. If you would like the ability to write to this table, use the type ```WRITEABLE_AUDITED``` instead of ```AUDITED```.
