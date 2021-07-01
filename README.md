@@ -17,3 +17,12 @@ new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
 ```
 
 This table is by default read only. If you would like the ability to write to this table, use the type ```WRITEABLE_AUDITED``` instead of ```AUDITED```.
+
+On schema changes to the subscribed table, the audit_table will automatically undergo a re-adjustment as well. For type changes, the types of the corresponding old_ and new_ fields will have the same type change. For field name changes, the corresponding text after the old_ and new_ of the corresponding audit table fields will change in the same way. Field deletions are slightly more complicated, as we do not want to get rid of any old data. For most field deletions, we simply rename the corresponding old_ and new_ fields to also have a prefix of \_archived. So, if you deleted a table called nums, the audit tables fields will go from being new_nums and old_nums, to new_nums_archived and old_nums_archived. This is unless you archive a field with the same name more than once, meaning an old_fieldname_archived and new_fieldname_archived already exists. If this is the case, it will simply append the smallest possible integer not taken to the end of it, starting with 2.
+
+There is also the question of how dropping works for the subcrscribed table, the audit_table, the procedure and trigger.
+- subscribed table : here, the audited trigger acts exactly the same as a normal trigger
+- audit_table : if the audit_table gets deleted, so does the procedure and the trigger
+- procedure : if the procedure gets deleted, so does the trigger but the table remains
+- trigger: if the trigger gets deleted, nothing else is effected [note: might want to delete the procedure]
+
