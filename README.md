@@ -6,7 +6,11 @@ An audited lua trigger is designed to automate the most common use of lua trigge
 CREATE LUA TRIGGER example_triggername ON (TABLE example_tablename ON INSERT AND UPDATE AND DELETE) AUDITED
 ```
 
-When you create an audited lua trigger, the data is stored in a table of the form "$audit_*tablename*". For a table with columns col1, ..., coln, of types type1, ..., typen it's audit table will have the following columns and types:
+When you create an audited lua trigger, the data is stored in a table of the form "$audit_*tablename*". All the tables have the following three non-nullable fields:
+- type cstring(4), tbl cstring(64), logtime datetime
+
+
+For a given table with columns col1, ..., coln, of types type1, ..., typen, it's audit table will have the following fields in addition to the three standard ones:
 ```sql
-(type cstring(4), tbl cstring(64), logtime datetime, new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen)
-```
+- new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
+``
