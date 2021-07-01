@@ -6,7 +6,9 @@ An audited lua trigger is designed to automate the most common use of lua trigge
 CREATE LUA TRIGGER example_triggername ON (TABLE example_tablename ON INSERT AND UPDATE) AUDITED
 ```
 
-When you create an audited lua trigger, the data is stored in a table of the form "$audit_*tablename*". All the tables have the following three non-nullable fields:
+When you create an audited lua trigger, the data is stored in by default stored in a table with name "$audit_*tablename*". If such a table already exists, it will create a table with the same name except with the smallest possible integer greater than or 2 appended to the end of it that makes its name unique. 
+
+All audit tables have the following three non-nullable fields:
 ```sql
 type cstring(4), tbl cstring(64), logtime datetime
 ```
