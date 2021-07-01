@@ -7,10 +7,11 @@ CREATE LUA TRIGGER example_triggername ON (TABLE example_tablename ON INSERT AND
 ```
 
 When you create an audited lua trigger, the data is stored in a table of the form "$audit_*tablename*". All the tables have the following three non-nullable fields:
-- type cstring(4), tbl cstring(64), logtime datetime
-
+```sql
+type cstring(4), tbl cstring(64), logtime datetime
+```
 
 For a given table with columns col1, ..., coln, of types type1, ..., typen, it's audit table will have the following fields in addition to the three standard ones:
 ```sql
-- new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
+new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
 ``
