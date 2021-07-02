@@ -6,7 +6,7 @@ An audited lua trigger is designed to automate the most common use of lua trigge
 CREATE LUA TRIGGER example_triggername ON (TABLE example_tablename ON INSERT AND UPDATE) AUDITED
 ```
 
-In addition to creating a trigger, an audited trigger will generate a procedure with the same name as the trigger (which will overwrite any existing procedure of that name) as well as a table with name "$audit_*tablename*" for the update information to be stored in. If a table with that name already exists, it will create a table with the same name except with the smallest possible integer greater than or 2 appended to the end of it that makes its name unique. 
+In addition to creating a trigger, an audited trigger will generate a procedure with the same name as the trigger (which will overwrite any existing procedure of that name) as well as a table with name "$audit_*tablename*" for the update information to be stored in. If a table with that name already exists, it will append a dollar sign to the end of the name, and then the smallest integer that creates a unique table. So if for the above statement ``` $audit_example_tablename ``` already existed, the audit table would have name ``` $audit_example_tablename$2 ```.
 
 All audit tables have the following three non-nullable fields:
 ```sql
