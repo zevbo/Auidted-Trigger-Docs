@@ -13,7 +13,7 @@ All audit tables have the following three non-nullable fields:
 type cstring(4), tbl cstring(64), logtime datetime
 ```
 
-For a given table with columns ```sql col1, ..., coln ``` of ```sql types type1, ..., typen ```, it's audit table will have the following nullable fields in addition to the three standard ones:
+For a given table with columns ``` col1, ..., coln ``` of ``` types type1, ..., typen ```, it's audit table will have the following nullable fields in addition to the three standard ones:
 ```sql
 new_col1 type1, ..., new_coln typen, old_col1 type1, ..., old_coln typen
 ```
